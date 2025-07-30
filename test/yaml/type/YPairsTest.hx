@@ -40,13 +40,13 @@ class YPairsTest
 	{
 		var result = type.resolve(value);
 		Assert.areEqual(value.length, result.length);
-		
+
 		for (i in 0...value.length)
 		{
 			var key = null;
 			for (k in value[i].keys())
 				key = k;
-			
+
 			Assert.areEqual(result[i][0], key);
 			Assert.areEqual(result[i][1], value[i].get(key));
 		}

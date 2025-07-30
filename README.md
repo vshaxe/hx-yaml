@@ -8,11 +8,11 @@ A cross platform [YAML](http://www.yaml.org/) 1.2 parser and renderer for Haxe 3
 From haxelib:
 
 	haxelib install yaml
-	
+
 Or the latest directly from GitHub
 
 	haxelib git yaml https://github.com/mikestead/hx-yaml.git src
-	
+
 ## Example
 
 #### invoice.yaml
@@ -60,26 +60,26 @@ class Example
 	{
 		#if sys
 		// Load and parse our invoice document using yaml.util.ObjectMap for key => value containers.
-		// Using this default option allows for complex key types and a slightly nicer api to 
-		// iterate keys/values. 
+		// Using this default option allows for complex key types and a slightly nicer api to
+		// iterate keys/values.
 		// Equivalent to Yaml.read("invoice.yaml", Parser.options().useMaps());
-		var data:AnyObjectMap = Yaml.read("invoice.yaml"); 
+		var data:AnyObjectMap = Yaml.read("invoice.yaml");
 
 		trace(data.get("tax")); // 251.42
 		trace(data.get(457)); // true
-		
+
 		// Load and parse the same document this time using dynamic objects for key => value containers.
 		// This option will stringify all keys but is useful for mapping to typedefs.
 		var data = Yaml.read("invoice.yaml", Parser.options().useObjects());
-		
+
 		trace(data.invoice); // 3483
 		trace(data.ship_to.given); // Chris
 		trace(Reflect.field(data, "457")); // true
 		#end
-		
+
 		// If you already have the yaml document in string form you can parse it directly
 		var data = Yaml.parse("key: value");
-		
+
 		trace(data.get("key")); // value
 	}
 
@@ -97,7 +97,7 @@ class Example
 		//      - milk: 1.22
 
 		#if sys
-		// This time write that same document to disk and adjust the flow level giving 
+		// This time write that same document to disk and adjust the flow level giving
 		// a more compact result.
 		Yaml.write("receipt.yaml", receipt, Renderer.options().setFlowLevel(1));
 		#end
@@ -141,7 +141,7 @@ yaml.Yaml.write(filePath:String, data:Dynamic, ?options:RenderOptions):Void
 
 yaml.Renderer.RendererOptions:
 	- indent:Int        - The space indentation to use. Default `2`.
-	- flowLevel:Int     - The level of nesting, when to switch from block to flow 
+	- flowLevel:Int     - The level of nesting, when to switch from block to flow
 							style for collections. -1 means block style everywhere. Default `-1`.
 	- styles:StringMap  - "tag" => "style" map. Each tag may have its own set of styles.
 	- schema:Schema     - The schema to use. Default is `yaml.schema.DefaultSchema`.
@@ -187,7 +187,7 @@ The list of standard YAML tags and corresponding Haxe types. See also
 !!map { ... }               # yaml.util.ObjectMap
 ```
 
-When parsing into maps, [yaml.util.ObjectMap](https://github.com/mikestead/hx-yaml/blob/master/src/yaml/util/ObjectMap.hx) 
+When parsing into maps, [yaml.util.ObjectMap](https://github.com/mikestead/hx-yaml/blob/master/src/yaml/util/ObjectMap.hx)
 is used. Under Haxe 3.0 `haxe.ds.ObjectMap` *would* be used but it doesn't support primitive
 keys on all targets and we need a map which can contain a mixture of key types.
 
@@ -199,4 +199,4 @@ keys on all targets and we need a map which can contain a mixture of key types.
 
 ## License
 
-MIT - [See LICENSE](https://github.com/mikestead/hx-yaml/blob/master/LICENSE) 
+MIT - [See LICENSE](https://github.com/mikestead/hx-yaml/blob/master/LICENSE)

@@ -4,7 +4,7 @@ import yaml.YamlType;
 
 class YMerge extends StringYamlType<String>
 {
-    public function new()
+	public function new()
 	{
 		super('tag:yaml.org,2002:merge', {kind:"string"}, {skip:true});
 	}

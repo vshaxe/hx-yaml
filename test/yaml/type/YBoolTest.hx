@@ -12,14 +12,14 @@ class YBoolTest
 	{
 		type = new YBool();
 	}
-	
+
 	@Test
 	public function shouldResolveExplicitValues()
 	{
 		var pos = ["true", "True", "TRUE", "y", "Y", "yes", "Yes", "YES", "on", "On", "ON"];
 		for (value in pos)
 			Assert.isTrue(type.resolve(value, true, true));
-		
+
 		var neg = ["n", "N", "no", "No", "NO", "false", "False", "FALSE", "off", "Off", "OFF"];
 		for (value in neg)
 			Assert.isFalse(type.resolve(value, true, true));
@@ -36,7 +36,7 @@ class YBoolTest
 		for (value in neg)
 			Assert.isFalse(type.resolve(value, true, false));
 	}
-	
+
 	@Test
 	public function shouldNotResolveExplicitValueWhenImplicit()
 	{

@@ -1,7 +1,7 @@
 package yaml.util;
 
 /// Wanted to use haxe.ds.ObjectMap under haxe3 but it doesn't support primitive keys on all targets so
-/// we'll use our own TObjectMap instead. 
+/// we'll use our own TObjectMap instead.
 
 //#if haxe3
 //under haxe 3 use built in map for speed, even though this prevents us using a null key.
@@ -14,7 +14,7 @@ typedef AnyObjectMap = ObjectMap<Dynamic, Dynamic>;
 /**
 Cross platform object map which also supports the option of one null key.
 */
-class TObjectMap<K, V> 
+class TObjectMap<K, V>
 {
 	var _keys:Array<K>;
 	var values:Array<V>;

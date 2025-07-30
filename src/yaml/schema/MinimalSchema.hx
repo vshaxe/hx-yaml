@@ -7,7 +7,7 @@ import yaml.Schema;
 
 class MinimalSchema extends Schema
 {
-    public function new()
+	public function new()
 	{
 		super([], [new YString(), new YSeq(), new YMap()]);
 	}

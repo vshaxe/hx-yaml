@@ -23,7 +23,7 @@ class YNull extends StringYamlType<Dynamic>
 	{
 		return YAML_NULL_MAP.exists(object) ? null : cantResolveType();
 	}
-	
+
 	override public function represent(object:Dynamic, ?style:String):String
 	{
 		return switch (style)

@@ -8,7 +8,7 @@ class YNullTest
 	var type:YNull;
 
 	@Before
-    public function before()
+	public function before()
 	{
 		type = new YNull();
 	}
@@ -20,7 +20,7 @@ class YNullTest
 		Assert.isNull(type.resolve("Null"));
 		Assert.isNull(type.resolve("NULL"));
 		Assert.isNull(type.resolve("~"));
-		
+
 		try {
 			type.resolve("some value");
 			Assert.fail("Should not resolve non-null value");

@@ -12,8 +12,8 @@ class YamlException
 
 	public var cause(default, null):Dynamic;
 	public var info(default, null):PosInfos;
-	
-    public function new(?message:String="", ?cause:Dynamic = null, ?info:PosInfos)
+
+	public function new(?message:String="", ?cause:Dynamic = null, ?info:PosInfos)
 	{
 		this.name = Type.getClassName(Type.getClass(this));
 		this.message = message;

@@ -6,7 +6,7 @@ import Type;
 
 class YOmap extends yaml.YamlType<Array<Dynamic>, Array<Dynamic>>
 {
-    public function new()
+	public function new()
 	{
 		super("tag:yaml.org,2002:omap", {kind:"array"}, {skip:true});
 	}
@@ -18,7 +18,7 @@ class YOmap extends yaml.YamlType<Array<Dynamic>, Array<Dynamic>>
 		usingMaps ? validateOMap(cast object) : validateObjectOMap(object);
 		return object;
 	}
-	
+
 	function validateOMap(object:Array<AnyObjectMap>)
 	{
 		var objectKeys = new ObjectMap<Dynamic, Dynamic>();
@@ -26,19 +26,19 @@ class YOmap extends yaml.YamlType<Array<Dynamic>, Array<Dynamic>>
 		{
 			var pairHasKey = false;
 			var pairKey:Dynamic = null;
-			
+
 			if (!Std.is(pair, AnyObjectMap))
 				cantResolveType();
-			
+
 			for (key in pair.keys())
 			{
 				if (pairKey == null) pairKey = key;
 				else cantResolveType(); // can only have one key
 			}
-	
+
 			if (pairKey == null) // must have a key
 				cantResolveType();
-	
+
 			if (objectKeys.exists(pairKey))
 				cantResolveType(); // no duplicate keys allowed
 			else
@@ -58,7 +58,7 @@ class YOmap extends yaml.YamlType<Array<Dynamic>, Array<Dynamic>>
 
 			if (Type.typeof(pair) != ValueType.TObject)
 				cantResolveType();
-			
+
 			for (key in Reflect.fields(pair))
 			{
 				if (pairKey == null) pairKey = key;
@@ -68,7 +68,7 @@ class YOmap extends yaml.YamlType<Array<Dynamic>, Array<Dynamic>>
 			if (pairKey == null) // must have a key
 				cantResolveType();
 
-			
+
 			if (objectKeys.exists(pairKey)) cantResolveType(); // no duplicate keys allowed
 			else objectKeys.set(pairKey, null);
 		}

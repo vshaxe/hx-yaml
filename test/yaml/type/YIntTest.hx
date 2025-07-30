@@ -9,7 +9,7 @@ class YIntTest
 	var type:YInt;
 
 	@Before
-    public function before()
+	public function before()
 	{
 		type = new YInt();
 	}
@@ -25,7 +25,7 @@ class YIntTest
 		var binaryA = "0b1010_0111_0100_1010_1110";
 		var binaryB = "0b10100111010010101110";
 		var sexagesimal = "190:20:30";
-		
+
 		Assert.areEqual(CONST, type.resolve(canonical));
 		Assert.areEqual(CONST, type.resolve(decimal));
 		Assert.areEqual(CONST, type.resolve(octal));

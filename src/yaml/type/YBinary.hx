@@ -21,7 +21,7 @@ class YBinary extends StringYamlType<Bytes>
 	];
 
 	static var BASE64_CHARTABLE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'.split('');
-	
+
 	public function new()
 	{
 		super('tag:yaml.org,2002:binary', {kind:"string"}, {kind:"binary", instanceOf:Bytes});
@@ -36,13 +36,13 @@ class YBinary extends StringYamlType<Bytes>
 		var leftdata = 0; // bits decoded, but yet to be appended
 
 		// Convert one by one.
-		for (idx in 0...length) 
+		for (idx in 0...length)
 		{
 			var code = Utf8.charCodeAt(object, idx);
 			var value = BASE64_BINTABLE[code & 0x7F];
 
 			// Skip LF(NL) || CR
-			if (0x0A != code && 0x0D != code) 
+			if (0x0A != code && 0x0D != code)
 			{
 				// Fail on illegal characters
 				if (-1 == value)
@@ -51,11 +51,11 @@ class YBinary extends StringYamlType<Bytes>
 					// Collect data into leftdata, update bitcount
 				leftdata = (leftdata << 6) | value;
 				leftbits += 6;
-			
+
 					// If we have 8 or more bits, append 8 bits to the result
 				if (leftbits >= 8) {
 					leftbits -= 8;
-			
+
 						// Append if not padding.
 					if (BASE64_PADDING_CODE != code) {
 						result.push((leftdata >> leftbits) & 0xFF);
@@ -69,11 +69,11 @@ class YBinary extends StringYamlType<Bytes>
 		// If there are any bits left, the base64 string was corrupted
 		if (leftbits != 0)
 			cantResolveType();
-		
+
 		var bytes = Bytes.alloc(result.length);
 		for (i in 0...result.length)
 			bytes.set(i, result[i]);
-		
+
 		return bytes;
 	}
 
@@ -101,19 +101,19 @@ class YBinary extends StringYamlType<Bytes>
 			index = object.length - rest;
 			result += BASE64_CHARTABLE[object.get(index + 0) >> 2];
 
-			if (2 == rest) 
+			if (2 == rest)
 			{
 				result += BASE64_CHARTABLE[((object.get(index + 0) & 0x03) << 4) + (object.get(index + 1) >> 4)];
 				result += BASE64_CHARTABLE[(object.get(index + 1) & 0x0F) << 2];
 				result += BASE64_PADDING_CHAR;
-			} 
+			}
 			else
 			{
 				result += BASE64_CHARTABLE[(object.get(index + 0) & 0x03) << 4];
 				result += BASE64_PADDING_CODE + BASE64_PADDING_CHAR;
 			}
 		}
-		
+
 		return result;
 	}
 }

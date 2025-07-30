@@ -5,7 +5,7 @@ import yaml.YamlType;
 
 class YSet extends YamlType<Dynamic, Dynamic>
 {
-    public function new()
+	public function new()
 	{
 		super('tag:yaml.org,2002:set', {kind:"object"}, {skip:true});
 	}
@@ -16,14 +16,14 @@ class YSet extends YamlType<Dynamic, Dynamic>
 		usingMaps ? validateSet(object) : validateObjectSet(object);
 		return object;
 	}
-	
+
 	function validateSet(object:AnyObjectMap)
 	{
 		for (key in object.keys())
 			if (object.get(key) != null)
 				cantResolveType();
 	}
-	
+
 	function validateObjectSet(object:Dynamic)
 	{
 		for (key in Reflect.fields(object))

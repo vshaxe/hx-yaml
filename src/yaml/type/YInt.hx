@@ -18,7 +18,7 @@ class YInt extends StringYamlType<Null<Int>>
 	{
 		super('tag:yaml.org,2002:int', {kind:"string"}, {kind:"integer", defaultStyle:"decimal", styleAliases:createStyleAliases()});
 	}
-	
+
 	function createStyleAliases()
 	{
 		var styleAliases = new StringMap<String>();
@@ -31,7 +31,7 @@ class YInt extends StringYamlType<Null<Int>>
 		styleAliases.set('16', "hexadecimal");
 		return styleAliases;
 	}
-	
+
 	override public function resolve(object:String, ?usingMaps:Bool = true, ?explicit:Bool):Null<Int>
 	{
 		if (!YAML_INTEGER_PATTERN.match(object))
@@ -58,11 +58,11 @@ class YInt extends StringYamlType<Null<Int>>
 		else if (value.indexOf("0x") == 0)
 		{
 			return sign * Ints.parseInt(value, 16);
-		} 
+		}
 		else if (value.indexOf("0") == 0)
 		{
 			return sign * Ints.parseInt(value, 8);
-		} 
+		}
 		else if (0 <= value.indexOf(':')) // base 60
 		{
 			for (v in value.split(':'))
@@ -72,16 +72,16 @@ class YInt extends StringYamlType<Null<Int>>
 
 			var result = 0;
 			var base = 1;
-	
-			for (d in digits) 
+
+			for (d in digits)
 			{
 				result += (d * base);
 				base *= 60;
 			}
-			
+
 			return sign * result;
-		} 
-		else 
+		}
+		else
 		{
 			return sign * Ints.parseInt(value, 10);
 		}

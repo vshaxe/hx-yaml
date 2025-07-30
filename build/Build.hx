@@ -15,7 +15,7 @@ class Build extends mtask.core.BuildBase
 		t.license = HaxeLibLicense.MIT;
 		t.versionDescription = "See https://github.com/mikestead/hx-yaml/blob/master/CHANGES.md";
 		t.username = "mikestead";
-		
+
 		t.addTag("cross");
 		t.addTag("utility");
 

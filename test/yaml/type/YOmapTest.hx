@@ -18,7 +18,7 @@ class YOmapTest
 	@Ignore("CPP seems to be passing arrays by value(?) so comparison check fails")
 	#end
 	@Test
-    public function shouldAllowValidOmap()
+	public function shouldAllowValidOmap()
 	{
 		var value:Array<AnyObjectMap> = [map("key01", "value01"), map("key02", "value02")];
 		shouldPass(value);
@@ -26,7 +26,7 @@ class YOmapTest
 		var value:Array<AnyObjectMap> = [map("key01", null), map("key02", null)];
 		shouldPass(value);
 	}
-	
+
 	@Test
 	public function shouldFailInvalidOmap()
 	{

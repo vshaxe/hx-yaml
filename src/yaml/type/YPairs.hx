@@ -6,7 +6,7 @@ import Type;
 
 class YPairs extends YamlType<Array<Array<Dynamic>>, Array<Dynamic>>
 {
-    public function new()
+	public function new()
 	{
 		super("tag:yaml.org,2002:pairs", {kind:"array"}, {skip:true});
 	}
@@ -18,7 +18,7 @@ class YPairs extends YamlType<Array<Array<Dynamic>>, Array<Dynamic>>
 		else
 			return resolveObjectPair(object);
 	}
-	
+
 	function resolveMapPair(object:Array<AnyObjectMap>)
 	{
 		var result:Array<Array<Dynamic>> = [];

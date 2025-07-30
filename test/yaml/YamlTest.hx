@@ -16,7 +16,7 @@ class YamlTest
 		smallSample = haxe.Resource.getString("small");
 		largeSample = haxe.Resource.getString("large");
 	}
-	
+
 	@TestDebug
 	public function shouldParseYaml()
 	{
@@ -24,7 +24,7 @@ class YamlTest
 //		var data:Dynamic = Yaml.parse(smallSample, Parser.options().useObjects());
 		var data:Dynamic = Yaml.parse(largeSample, Parser.options().useObjects());
 		trace((haxe.Timer.stamp() - time));
-		
+
 		#if sys
 		Yaml.write("bin/test/output.yaml", data);
 		#else

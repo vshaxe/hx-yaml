@@ -7,12 +7,12 @@ class Utf8
 		var size = haxe.Utf8.length(value);
 		var pos = startIndex;
 		var length = 0;
-		
+
 		if (endIndex == null)
 		{
 			length = size - pos;
 		}
-		else 
+		else
 		{
 			if (startIndex > endIndex)
 			{
@@ -21,7 +21,7 @@ class Utf8
 			}
 			length = endIndex - pos;
 		}
-		
+
 		return haxe.Utf8.sub(value, pos, length);
 	}
 }

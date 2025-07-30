@@ -1,22 +1,22 @@
 /*
 Copyright (c) 2012 Massive Interactive
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of 
-this software and associated documentation files (the "Software"), to deal in 
-the Software without restriction, including without limitation the rights to 
-use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies 
-of the Software, and to permit persons to whom the Software is furnished to do 
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
 so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all 
+The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
@@ -32,11 +32,11 @@ class Ints
 
 	/**
 	Returns the string representation of an integer value based on an optional radix (base).
-	
+
 	A default base of 10 is used if none is supplied.
-	
+
 	A base below 2 or above 36 will cause an exception.
-	
+
 	@param  value   The integer value to return the string representation of.
 	@param  radix   An integer between 2 and 36 to be used as the base for conversion. Defaults to 10.
 	@return The string representation of the integer at the defined radix.
@@ -47,10 +47,10 @@ class Ints
 			throw "Unsupported radix " + radix;
 
 		#if (js || flash)
-		
+
 		return untyped value.toString(radix);
-		
-		#else 
+
+		#else
 
 		if (radix == 10) return Std.string(value);
 		else if (value == 0) return '0';
@@ -78,19 +78,19 @@ class Ints
 
 	/**
 	Parses a string and returns the decimal integer value it represents or `null` if no value could be parsed.
-	
+
 	An optional radix can be supplied to indicate the base the value should be parsed under.
 	If no base is supplied a base of 10 will be assumed, unless the value begins with '0x', in which case
 	a base of 16 (hex) is assumed.
-	
-	Parsing continues until complete or an invalid char is found. In that case the value parsed up until that point 
+
+	Parsing continues until complete or an invalid char is found. In that case the value parsed up until that point
 	is returned. e.g. `parseInt("44dae", 10)` returns `44`.
-	
-	The reason for returning `null` instead of `Math.NaN` when parsing fails completely is that NaN is a Float which 
+
+	The reason for returning `null` instead of `Math.NaN` when parsing fails completely is that NaN is a Float which
 	would force the return type to also be Float. This would mean `var a:Int = parseInt(value)` would become invalid,
 	which is unintuitive. A return type of Dynamic would fix this on most systems, but not flash (avm2) which
 	will auto cast the Float to an Int meaning Math.isNaN test would always fail.
-	
+
 	@param  value   The value to parse into an integer
 	@param  radix   The radix to base the conversion on. Default is 16 for string starting with '0x' otherwise 10.
 	@return The decimal integer value which the supplied string represents, or null if it could not be parsed.
@@ -101,21 +101,21 @@ class Ints
 			throw "Unsupported radix " + radix;
 
 		#if js
-		
+
 		var v = untyped __js__("parseInt")(value, radix);
 		return (untyped __js__("isNaN")(v)) ? null : v;
-		
+
 		#elseif flash9
-		
+
 		if (radix == null) radix = 0;
 		var v = untyped __global__["parseInt"](value, radix);
 		return (untyped __global__["isNaN"](v)) ? null : v;
-		
+
 		#elseif flash8
-		
+
 		var v = _global["parseInt"](value, radix);
 		return _global["isNaN"](v) ? null : v;
-		
+
 		#else // do the conversion ourselves
 
 		value = StringTools.trim(value).toLowerCase();

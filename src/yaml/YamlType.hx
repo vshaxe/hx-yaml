@@ -3,13 +3,13 @@ package yaml;
 import yaml.util.StringMap;
 import haxe.PosInfos;
 
-typedef POptions = 
+typedef POptions =
 {
 	?kind:String,
 	?skip:Bool
 }
 
-typedef ROptions = 
+typedef ROptions =
 {
 	?kind:String,
 	?defaultStyle:String,
@@ -27,12 +27,12 @@ class YamlType<T, D>
 	public var tag:String;
 	public var loader:POptions;
 	public var dumper:ROptions;
-	
-    public function new(tag:String, loaderOptions:POptions, dumperOptions:ROptions)
+
+	public function new(tag:String, loaderOptions:POptions, dumperOptions:ROptions)
 	{
 		if (loaderOptions == null && dumperOptions == null)
 			throw new YamlException('Incomplete YAML type definition. "loader" or "dumper" setting must be specified.');
-		
+
 		this.tag = tag;
 		this.loader = loaderOptions;
 		this.dumper = dumperOptions;
@@ -72,9 +72,9 @@ class YamlType<T, D>
 		if (loader.skip != true && 'string' != loader.kind && 'array' != loader.kind && 'object' != loader.kind)
 		{
 			throw new YamlException('Unacceptable "kind" setting of a type loader: ' + loader.kind);
-		}		
+		}
 	}
-	
+
 	function validateDumperOptions()
 	{
 		if (dumper.skip != true &&

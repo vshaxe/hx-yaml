@@ -45,7 +45,7 @@ class YBool extends StringYamlType<Bool>
 		hash.set("OFF", false);
 		hash;
 	};
-	
+
 	public function new()
 	{
 		super('tag:yaml.org,2002:bool', {kind:"string"}, {kind:"boolean", defaultStyle:"lowercase"});
@@ -53,13 +53,13 @@ class YBool extends StringYamlType<Bool>
 
 	override public function resolve(object:String, ?usingMaps:Bool = true, ?explicit:Bool):Bool
 	{
-		if (explicit) 
+		if (explicit)
 		{
 			if (YAML_EXPLICIT_BOOLEAN_MAP.exists(object))
 			{
 				return YAML_EXPLICIT_BOOLEAN_MAP.get(object);
-			} 
-			else 
+			}
+			else
 			{
 				return cantResolveType();
 			}
@@ -70,7 +70,7 @@ class YBool extends StringYamlType<Bool>
 			{
 				return YAML_IMPLICIT_BOOLEAN_MAP.get(object);
 			}
-			else 
+			else
 			{
 				return cantResolveType();
 			}
@@ -84,7 +84,7 @@ class YBool extends StringYamlType<Bool>
 			case "uppercase": object ? 'TRUE' : 'FALSE';
 			case "lowercase": object ? 'true' : 'false';
 			case "camelcase": object ? 'True' : 'False';
-			default: 
+			default:
 				throw new YamlException("Style not supported: " + style);
 				null;
 		}

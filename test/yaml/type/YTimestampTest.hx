@@ -9,7 +9,7 @@ class YTimestampTest
 	var type:YTimestamp;
 
 	@Before
-    public function before()
+	public function before()
 	{
 		type = new YTimestamp();
 	}
@@ -26,7 +26,7 @@ class YTimestampTest
 		var noTimeZone = "2001-12-15 2:59:43.10";
 		var date = "2002-12-14";
 		var time:Float = 1039824000000;
-		
+
 		Assert.areEqual(STAMP, type.resolve(canonical).getTime());
 		Assert.areEqual(STAMP, type.resolve(validIso8601).getTime());
 		Assert.areEqual(STAMP, type.resolve(spaceSeparated).getTime());

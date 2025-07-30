@@ -15,10 +15,10 @@ import yaml.Schema;
 
 class SafeSchema extends Schema
 {
-    public function new()
+	public function new()
 	{
-		super([new MinimalSchema()], 
-			[new YBinary(), new YOmap(), new YPairs(), new YSet()], 
+		super([new MinimalSchema()],
+			[new YBinary(), new YOmap(), new YPairs(), new YSet()],
 			[new YNull(), new YBool(), new YInt(), new YFloat(), new YTimestamp(), new YMerge()]);
 	}
 }

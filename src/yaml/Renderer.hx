@@ -41,7 +41,7 @@ class RenderOptions
 	}
 
 	/**
-	The indentation level. Default is 2. 
+	The indentation level. Default is 2.
 	*/
 	public function setIndent(indent:Int):RenderOptions
 	{
@@ -59,7 +59,7 @@ class RenderOptions
 class Renderer
 {
 	/**
-	Utility method to create RenderOptions for configuring a Renderer instance. 
+	Utility method to create RenderOptions for configuring a Renderer instance.
     */
 	public static function options():RenderOptions
 	{
@@ -77,7 +77,7 @@ class Renderer
 	var kind:String;
 	var tag:String;
 	var result:Dynamic;
-	
+
 	public function new()
 	{}
 
@@ -86,7 +86,7 @@ class Renderer
 		options.schema = new SafeSchema();
 		return render(input, options);
 	}
-	
+
 	public function render(input:Dynamic, options:RenderOptions)
 	{
 		schema = options.schema;
@@ -98,16 +98,16 @@ class Renderer
 		explicitTypes = schema.compiledExplicit;
 
 		writeNode(0, input, true, true);
-		
+
 		return result + '\n';
 	}
-	
-	function generateNextLine(level:Int) 
+
+	function generateNextLine(level:Int)
 	{
 		return '\n' + Strings.repeat(' ', indent * level);
 	}
 
-	function testImplicitResolving(object:Dynamic) 
+	function testImplicitResolving(object:Dynamic)
 	{
 		for (type in implicitTypes)
 		{
@@ -130,16 +130,16 @@ class Renderer
 		#if sys
 		object = Utf8.encode(object);
 		#end
-		
+
 		var isQuoted = false;
 		var checkpoint = 0;
 		var position = -1;
 
 		result = '';
 
-		if (0 == object.length || 
-			CHAR_SPACE == Utf8.charCodeAt(object, 0) || 
-			CHAR_SPACE == Utf8.charCodeAt(object, Utf8.length(object) - 1)) 
+		if (0 == object.length ||
+			CHAR_SPACE == Utf8.charCodeAt(object, 0) ||
+			CHAR_SPACE == Utf8.charCodeAt(object, Utf8.length(object) - 1))
 		{
 			isQuoted = true;
 		}
@@ -148,7 +148,7 @@ class Renderer
 		while (++position < length)
 		{
 			var character = Utf8.charCodeAt(object, position);
-			if (!isQuoted) 
+			if (!isQuoted)
 			{
 				if (CHAR_TAB == character ||
 					CHAR_LINE_FEED == character ||
@@ -171,7 +171,7 @@ class Renderer
 					CHAR_GRAVE_ACCENT == character ||
 					CHAR_QUESTION == character ||
 					CHAR_COLON == character ||
-					CHAR_MINUS == character) 
+					CHAR_MINUS == character)
 				{
 					isQuoted = true;
 				}
@@ -185,7 +185,7 @@ class Renderer
 				(0x10000 <= character && character <= 0x10FFFF)))
 			{
 				result += yaml.util.Utf8.substring(object, checkpoint, position);
-				
+
 				if (ESCAPE_SEQUENCES.exists(character))
 				{
 					result += ESCAPE_SEQUENCES.get(character);
@@ -194,7 +194,7 @@ class Renderer
 				{
 					result += encodeHex(character);
 				}
-				
+
 				checkpoint = position + 1;
 				isQuoted = true;
 			}
@@ -214,13 +214,13 @@ class Renderer
 		{
 			result = '"' + result + '"';
 		}
-		
+
 		#if sys
 		result = Utf8.decode(result);
 		#end
 	}
 
-	function writeFlowSequence(level:Int, object:Array<Dynamic>) 
+	function writeFlowSequence(level:Int, object:Array<Dynamic>)
 	{
 		var _result = '';
 		var _tag = tag;
@@ -238,11 +238,11 @@ class Renderer
 		result = '[' + _result + ']';
 	}
 
-	function writeBlockSequence(level:Int, object:Array<Dynamic>, compact:Bool) 
+	function writeBlockSequence(level:Int, object:Array<Dynamic>, compact:Bool)
 	{
 		var _result = '';
 		var _tag    = tag;
-		
+
 		for (index in 0...object.length)
 		{
 			if (!compact || 0 != index)
@@ -263,7 +263,7 @@ class Renderer
 		else
 			writeMapFlowMapping(level, object);
 	}
-	
+
 	function writeObjectFlowMapping(level:Int, object:Dynamic)
 	{
 		var _result = '';
@@ -289,7 +289,7 @@ class Renderer
 		}
 
 		tag = _tag;
-		result = '{' + _result + '}';		
+		result = '{' + _result + '}';
 	}
 
 	#if haxe3
@@ -303,7 +303,7 @@ class Renderer
 		var index = 0;
 		var objectKey;
 		var keys:Iterator<Dynamic> = object.keys();
-		
+
 		for (objectKey in keys)
 		{
 			if (0 != index++)
@@ -332,7 +332,7 @@ class Renderer
 		else
 			writeMapBlockMapping(level, object, compact);
 	}
-	
+
 	function writeObjectBlockMapping(level:Int, object:Dynamic, compact:Bool)
 	{
 		var _result = '';
@@ -361,7 +361,7 @@ class Renderer
 		}
 
 		tag = _tag;
-		result = _result;		
+		result = _result;
 	}
 
 	#if haxe3
@@ -374,7 +374,7 @@ class Renderer
 		var _tag = tag;
 		var index = 0;
 		var keys:Iterator<Dynamic> = object.keys();
-		
+
 		for (objectKey in keys)
 		{
 			if (!compact || 0 != index++)
@@ -417,12 +417,12 @@ class Renderer
 				(null == type.dumper.predicate  || type.dumper.predicate(object))))
 			{
 				tag = explicit ? type.tag : '?';
-	
+
 				if (styleMap.exists(type.tag))
 					style = styleMap.get(type.tag);
 				else
 					style = type.dumper.defaultStyle;
-		
+
 				var success = true;
 				try
 				{
@@ -432,13 +432,13 @@ class Renderer
 				{
 					success = false;
 				}
-				
-				if (success) 
+
+				if (success)
 				{
 					kind = kindOf(_result);
 					result = _result;
-				} 
-				else 
+				}
+				else
 				{
 					if (explicit)
 						throw new YamlException('cannot represent an object of !<' + type.tag + '> type');
@@ -451,7 +451,7 @@ class Renderer
 		return false;
 	}
 
-	function writeNode(level:Int, object:Dynamic, block:Bool, compact:Bool) 
+	function writeNode(level:Int, object:Dynamic, block:Bool, compact:Bool)
 	{
 		tag = null;
 		result = object;
@@ -468,8 +468,8 @@ class Renderer
 		if ('object' == kind)
 		{
 			var empty = (Type.typeof(object) == ValueType.TObject) ? (Reflect.fields(object).length == 0) : Lambda.empty(object);
-			
-			if (block && !empty) 
+
+			if (block && !empty)
 			{
 				writeBlockMapping(level, object, compact);
 			}
@@ -488,20 +488,20 @@ class Renderer
 			{
 				writeFlowSequence(level, result);
 			}
-		} 
-		else if ('string' == kind) 
+		}
+		else if ('string' == kind)
 		{
-			if ('?' != tag) 
+			if ('?' != tag)
 			{
 				writeScalar(result);
 			}
 		}
-		else 
+		else
 		{
 			throw new YamlException('unacceptabe kind of an object to dump (' + kind + ')');
 		}
 
-		if (null != tag && '?' != tag) 
+		if (null != tag && '?' != tag)
 		{
 			result = '!<' + tag + '> ' + result;
 		}
