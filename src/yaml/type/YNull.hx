@@ -3,7 +3,7 @@ package yaml.type;
 import yaml.util.StringMap;
 import yaml.YamlType;
 
-class YNull extends yaml.StringYamlType<Dynamic>
+class YNull extends StringYamlType<Dynamic>
 {
 	static var YAML_NULL_MAP:StringMap<Bool> = {
 		var hash = new StringMap<Bool>();

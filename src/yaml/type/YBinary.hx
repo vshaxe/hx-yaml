@@ -4,7 +4,7 @@ import haxe.io.Bytes;
 import haxe.Utf8;
 import yaml.YamlType;
 
-class YBinary extends yaml.StringYamlType<Bytes>
+class YBinary extends StringYamlType<Bytes>
 {
 	static inline var BASE64_PADDING_CODE = 0x3D;
 	static inline var BASE64_PADDING_CHAR = '=';

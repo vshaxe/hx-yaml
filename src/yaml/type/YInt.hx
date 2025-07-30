@@ -5,7 +5,7 @@ import yaml.util.StringMap;
 import yaml.util.Ints;
 import yaml.YamlType;
 
-class YInt extends yaml.StringYamlType<Null<Int>>
+class YInt extends StringYamlType<Null<Int>>
 {
 	static var YAML_INTEGER_PATTERN = new EReg(
 				'^(?:[-+]?0b[0-1_]+' +

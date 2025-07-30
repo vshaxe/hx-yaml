@@ -2,7 +2,7 @@ package yaml.type;
 
 import yaml.YamlType;
 
-class YString extends yaml.StringYamlType<String>
+class YString extends StringYamlType<String>
 {
     public function new()
 	{

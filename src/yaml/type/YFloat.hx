@@ -3,7 +3,7 @@ package yaml.type;
 import yaml.YamlType;
 import yaml.util.Floats;
 
-class YFloat extends yaml.StringYamlType<Null<Float>>
+class YFloat extends StringYamlType<Null<Float>>
 {
 	static var YAML_FLOAT_PATTERN = new EReg(
 		'^(?:[-+]?(?:[0-9][0-9_]*)\\.[0-9_]*(?:[eE][-+][0-9]+)?' +
