@@ -60,7 +60,7 @@ class Renderer
 {
 	/**
 	Utility method to create RenderOptions for configuring a Renderer instance.
-    */
+	*/
 	public static function options():RenderOptions
 	{
 		return new RenderOptions();
